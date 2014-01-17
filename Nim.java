@@ -68,7 +68,7 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
 		drawLine=true;
 		
 		for(int i=0; i<15; i++){
-			if(circle[i].x>line[0].x && circle[i].x<line[1].x && circle[i].y<line[0].y && circle[i].y+25>line[0].y){
+			if((circle[i].x>line[0].x && circle[i].x<line[1].x && circle[i].y<line[0].y && circle[i].y+25>line[0].y) || (circle[i].x<line[0].x && circle[i].x>line[1].x && circle[i].y<line[0].y && circle[i].y+25>line[0].y)){
 				color[i]=Color.green;
 			} else {
 				color[i]=Color.black;
