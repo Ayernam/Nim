@@ -60,18 +60,22 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseDragged(MouseEvent drag) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
+		if(drag.getX()>25 && drag.getX()<300 && drag.getY()>25 && drag.getY()<300){
+			line[1].x=drag.getX();
+			line[1].y=line[0].y;
+		}
+		drawLine=true;
+		
 		for(int i=0; i<15; i++){
-			if(drag.getX()>circle[i].x && drag.getX()<circle[i].x+25 && drag.getY()>circle[i].y && drag.getY()<circle[i].y+25){
+			if(circle[i].x>line[0].x && circle[i].x<line[1].x && circle[i].y<line[0].y && circle[i].y+25>line[0].y){
 				color[i]=Color.green;
-				System.out.println(i);
+			} else {
+				color[i]=Color.black;
 			}
 		}
 		
-		/*
-			} else {
-				color[i]=Color.black;
-				*/
+		repaint();
 	}
 
 	@Override
@@ -102,8 +106,8 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
 	public void mousePressed(MouseEvent click) {
 		// TODO Auto-generated method stub
 		if(click.getX()>25 && click.getX()<300 && click.getY()>25 && click.getY()<300){
-			line[0].x=click.getX();//
-			line[0].y=click.getY();//
+			line[0].x=click.getX();
+			line[0].y=50*((int) click.getY()/50)+10;
 		}
 	}
 
@@ -111,8 +115,8 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
 	public void mouseReleased(MouseEvent release) {
 		// TODO Auto-generated method stub
 		if(release.getX()>25 && release.getX()<300 && release.getY()>25 && release.getY()<300){
-			line[1].x=release.getX();//
-			line[1].y=release.getY();//
+			line[1].x=release.getX();
+			line[1].y=line[0].y;
 		}
 		drawLine=true;
 		repaint();
