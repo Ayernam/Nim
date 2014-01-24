@@ -56,6 +56,9 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
     		page.drawString(p2name, 470, 100);
     		page.drawString(String.valueOf(score[0]), 395, 150);
     		page.drawString(String.valueOf(score[1]), 495, 150);
+    		page.drawString("The Game of NIM", 400, 200);
+    		page.drawString("By Amir Amhaz", 400, 225);
+    		page.drawString("and Justin Becker", 400, 250);
         }
 
         @Override
