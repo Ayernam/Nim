@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -74,7 +75,6 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
             	}
             }
             
-            
         	repaint();
         }
 
@@ -117,6 +117,21 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
             if(release.getX()>25 && release.getX()<300 && release.getY()>50 && release.getY()<300){
                 line[1].x=release.getX();
                 line[1].y=line[0].y;
+            }
+            ArrayList<Integer> xVals = new ArrayList<Integer>();
+            for(int j = 0; j < 15; j++){
+            	if(color[j] != Color.black){
+            		xVals.add(circle[j].x);
+            	}
+            }
+            for(int k = 0; k < xVals.size() - 1; k++){
+            	if(xVals.get(k) < xVals.get(k+1) - 50){
+            		JOptionPane.showMessageDialog(this, "Invalid move! Selected circles must be contiguous!");
+            		for(int i = 0; i < 15; i++){
+            			color[i] = Color.black;
+            		}
+            		break;
+            	}
             }
             repaint();
             turnEnd();
