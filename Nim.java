@@ -1,11 +1,12 @@
 import java.applet.Applet;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 public class Nim extends Applet implements MouseListener, MouseMotionListener{
         boolean drawLine = false;
@@ -19,12 +20,13 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
         {
             addMouseListener(this);
             addMouseMotionListener(this);
-            resetGame();
+    		p1name = JOptionPane.showInputDialog("What is player one's name?", p1name);
+    		p2name = JOptionPane.showInputDialog("What is player two's name?", p2name);
         }
         public void paint(Graphics page) {
         	//Set size and background
         	setBackground(Color.white);
-			setSize(750, 500);
+			setSize(600, 350);
         	page.setColor(Color.black);
         	page.drawRect(25, 25, 275, 275);
 
@@ -71,6 +73,8 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
                     color[i]=Color.black;
             	}
             }
+            
+            
         	repaint();
         }
 
@@ -114,7 +118,6 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
                 line[1].x=release.getX();
                 line[1].y=line[0].y;
             }
-            drawLine=true;
             repaint();
             turnEnd();
         }
@@ -131,6 +134,7 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
             		inPlayCircles--;
             	}
             }
+            System.out.println(selectedCircles);
             if(selectedCircles != 0){
             	if(inPlayCircles == 0){
             		endGame();
@@ -138,6 +142,9 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
                     greenPlayerTurn = !greenPlayerTurn;
             	}
             }
+
+            drawLine=false;
+            repaint();
         }
         public void endGame(){
         	if(greenPlayerTurn){
@@ -147,7 +154,7 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
         	}
         	//JOptionPane.showMessageDialog(this, "Game Over!" + (greenPlayerTurn ? " Green Player is victorious!" : " Red Player is victorious!"));
         	Object[] options = {"New Game","Exit"};
-        	int n = JOptionPane.showOptionDialog(this,"Game Over!" + (!greenPlayerTurn ? " Green Player is victorious!" : " Red Player is victorious!") + '\n' + "Would you like to play again?", "Game over", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        	int n = JOptionPane.showOptionDialog(this,"Game Over! " + (greenPlayerTurn ? p1name + " is victorious!" : p2name + " is victorious!") + '\n' + "Would you like to play again?", "Game over", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
         	System.out.println("gameover");
         	System.out.println(n);
         	if(n == 0){
@@ -163,7 +170,5 @@ public class Nim extends Applet implements MouseListener, MouseMotionListener{
     			color[i] = Color.black;
     		}
     		circle = new Point[]{new Point(150,50), new Point(125,100), new Point(175,100), new Point(100,150), new Point(150,150), new Point(200,150), new Point(75,200), new Point(125,200), new Point(175,200), new Point(225,200), new Point(50,250), new Point(100,250), new Point(150,250), new Point(200,250), new Point(250,250)};
-    		p1name = JOptionPane.showInputDialog("What is player one's name?", p1name);
-    		p2name = JOptionPane.showInputDialog("What is player two's name?", p2name);
         }
 }
